@@ -5,13 +5,15 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./data:/var/lib/postgresql
+      - ./data:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
   web:
     build: .
+    # 起動（コンテナのポート8000番で受け付けるように起動する）
+    command: python3.7 manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
     ports:
